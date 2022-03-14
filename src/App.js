@@ -54,6 +54,13 @@ function App() {
           setNewName('')
           setNewNumber('')
         })
+        .catch(error => { 
+          console.log(error.response.data.error)
+          setErrorMessage(error.response.data.error)
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
+        })
       }else{
         console.log("aborted")
       }
@@ -62,6 +69,7 @@ function App() {
       personService
       .addPerson(newPerson)
       .then(returnedPerson => {
+        console.log("returned person",returnedPerson)
         setPersons(persons.concat(returnedPerson))
         setSuccessMassage(`added ${newName}`)
 
@@ -73,6 +81,14 @@ function App() {
         setNewName('')
         setNewNumber('')
       })
+      .catch(error => { 
+        console.log(error.response.data.error)
+        setErrorMessage(error.response.data.error)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+      })
+
     }
   }
 
